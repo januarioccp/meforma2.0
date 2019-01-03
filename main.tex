@@ -1,0 +1,135 @@
+\documentclass[
+    12pt, 
+    openright, 
+    twside, 
+    a4paper, 
+    english, 
+    brazil
+]{abntex2}
+
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[T1]{fontenc}	
+\usepackage[utf8]{inputenc}		  %Caractes especiais
+\usepackage{lastpage}			 	 % Usado pela Ficha catalográfica
+\usepackage{indentfirst}			 % Indenta o 1º parágrafo de cada seção.
+\usepackage{color}					  % Controle das cores
+\usepackage{graphicx}				% Inclusão de gráficos
+\usepackage{microtype}
+% \usepackage{natbib}
+% \usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,amsthm}
+\usepackage{setspace}
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+\usepackage[normalem]{ulem}
+\usepackage{todonotes}
+\usepackage{dirtytalk}
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+\renewcommand{\bf}[1]{\mathbf{#1}}
+\renewcommand{\rm}[1]{\mathrm{#1}}
+\usepackage{multirow}
+\usepackage{cite}
+\renewcommand\citeleft{[}
+\renewcommand\citeright{]}
+\usepackage{minted}
+\renewcommand{\imprimircapa}{
+\include{0_capa}}
+\renewcommand{\imprimirfolhaderosto}{
+\include{1_rosto}}
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+	
+\definecolor{blue}{RGB}{41,5,195}
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=black,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+
+\makeatother
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+\makeindex
+
+\usepackage{float}
+\begin{document}
+\selectlanguage{brazil}
+\frenchspacing 
+\pretextual
+\imprimircapa
+\imprimirfolhaderosto
+\include{2_aprovacao}
+\include{3_agradecimentos}
+\include{4_resumos}
+% ---
+% Lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+%% ---
+% Lista de Tabelas
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+\include{siglas}
+% ---
+% inserir o sumario
+%% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+%% ---
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+\input{01_introducao}
+\input{02_integralizacao}
+\input{03_aplicacao}
+\input{04_dados}
+\input{05_avaliacao}
+\input{06_conclusao.tex}
+
+\phantompart
+\postextual
+\bibliography{references.bib}
+\phantompart
+\printindex
+\end{document}
